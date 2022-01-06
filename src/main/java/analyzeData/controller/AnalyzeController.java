@@ -1,5 +1,6 @@
 package analyzeData.controller;
 
+import analyzeData.exception.ReportNotFoundException;
 import analyzeData.model.Note;
 import analyzeData.model.Patient;
 import analyzeData.model.Probability;
@@ -50,6 +51,7 @@ public class AnalyzeController {
                 .firstname(patient.getFirstname()).lastname(patient.getLastname())
                 .uuid(patient.getUuid()).address(patient.getAddress())
                 .birthdate(String.valueOf(patient.getBirthdate())).gender(String.valueOf(patient.getGender())).phone(patient.getPhone()).build();
+        if (report.getProbability() == null) throw new ReportNotFoundException("No report found for patient with id: " + id);
         return report;
     }
 
@@ -74,6 +76,7 @@ public class AnalyzeController {
                     .birthdate(String.valueOf(patient.getBirthdate())).gender(String.valueOf(patient.getGender())).phone(patient.getPhone()).build());
 
         });
+        if (reports.isEmpty()) throw new ReportNotFoundException("No report found for patient with lastname: " + lastname);
         return reports;
     }
 
