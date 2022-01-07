@@ -9,11 +9,13 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.ComponentScan;
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 /**
  * This is the main class of analyzeData microservice
  */
 @Slf4j
+@EnableSwagger2
 @EnableAutoConfiguration
 @SpringBootApplication
 @ComponentScan(basePackages = {"analyzeData"})
