@@ -8,12 +8,10 @@ import analyzeData.model.Report;
 import analyzeData.proxy.MedicalNotesProxy;
 import analyzeData.proxy.SearchPatientProxy;
 import analyzeData.service.IAnalyzeService;
+import io.swagger.annotations.Api;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +21,7 @@ import java.util.List;
  */
 @Slf4j
 @RestController
+@Api("Rest API for analyzeData endpoints")
 public class AnalyzeController {
 
     @Autowired
@@ -39,7 +38,7 @@ public class AnalyzeController {
      * @param id the id of the targeted patient
      * @return the report e.g. the output of the analysis
      */
-    @RequestMapping("/assess")
+    @GetMapping("/assess")
     public Report analyzePatientData(@RequestParam String id) {
         log.info("AnalyzeController : Analyzing patient data");
         Patient patient = searchPatientProxy.getPatientById(id);
@@ -84,7 +83,7 @@ public class AnalyzeController {
      * This endpoint is responsible for analyzing all patient data
      * @return the reports e.g. the outputs of all patient data analysis
      */
-    @RequestMapping("/assess/all")
+    @GetMapping("/assess/all")
     public List<Report> analyzePatientsData() {
         log.info("AnalyzeController : Analyzing patient data");
         List<Report> reports = new ArrayList<>();
